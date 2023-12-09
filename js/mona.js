@@ -1,26 +1,18 @@
 // Fetching collectables from monaverse
-const apiUrl = 'https://api.hackathon.monaverse.com/collectibles?type[]=Space&property[]=Music'
-
-const space1 = {}
-const space2 = {}
-const space3 = {}
-const space4 = {}
-const space5 = {}
-const spcae6 = {}
-const spcae7 = {}
-const space8 = {}
+const spaceUrl = 'https://api.hackathon.monaverse.com/collectibles?type[]=Space&property[]=Music'
+const avatarUrl = "https://api.hackathon.monaverse.com/collectibles?type%5B%5D=Avatar&property%5B%5D=Robot"
 
 const gallery_data = {}
-async function monaAPI() {
+async function monaSpaceAPI() {
     const response = await fetch(apiUrl)
-    const musicApi = await response.json();
-    // space1 = musicApi['data'][0];
-    // space2 = musicApi['data'][1];
-    // space3 = musicApi['data'][2];
-    // space4 = musicApi['data'][3];
+    const space = await response.json();
+    console.log(space);
 }
 
-// console.log(space1, space2, space3);
-console.log(musicApi);
-
-monaAPI()
+async function monaAvatarAPI() {
+    const response = await fetch(avatarUrl)
+    const avatar = await response.json();
+    console.log(avatar);
+}
+  
+monaAvatarAPI()
