@@ -110,9 +110,26 @@ function createPainting(imageURL, width, height, position) {
     return painting;
 }
 
+// Front wall
 const painting1 = createPainting("https://ipfs.mona.gallery/ipfs/bafkreicxms6zvxc2gczd67u7zucwfi5hwx6gqrn3e5xjsuwnijzzcthmvi", 10, 5, new THREE.Vector3(-10, 5, -19.95));
 const painting2 = createPainting("https://ipfs.mona.gallery/ipfs/bafybeiaehgywxnwfztemnxa5a5rkqoggsietdc7jwci5qregoe33q2xsaq", 10, 5, new THREE.Vector3(10, 5, -19.95));
 scene.add(painting1, painting2);
+
+// Left wall
+const painting3 = createPainting("https://ipfs.mona.gallery/ipfs/bafkreicxms6zvxc2gczd67u7zucwfi5hwx6gqrn3e5xjsuwnijzzcthmvi", 10, 5, new THREE.Vector3(-19.5, 5, -10));
+painting3.rotation.y = Math.PI/2;
+const painting4 = createPainting("https://ipfs.mona.gallery/ipfs/bafybeiaehgywxnwfztemnxa5a5rkqoggsietdc7jwci5qregoe33q2xsaq", 10, 5, new THREE.Vector3(-19.5, 5, 5));
+painting4.rotation.y = Math.PI/2;
+scene.add(painting3, painting4);
+
+// Right wall
+const painting5 = createPainting("https://ipfs.mona.gallery/ipfs/bafkreicxms6zvxc2gczd67u7zucwfi5hwx6gqrn3e5xjsuwnijzzcthmvi", 10, 5, new THREE.Vector3(-19.5, 5, -10));
+painting3.rotation.y = Math.PI/2;
+const painting6 = createPainting("https://ipfs.mona.gallery/ipfs/bafybeiaehgywxnwfztemnxa5a5rkqoggsietdc7jwci5qregoe33q2xsaq", 10, 5, new THREE.Vector3(-19.5, 5, 5));
+painting4.rotation.y = Math.PI/2;
+scene.add(painting3, painting4);
+
+
 
 // Controls
 document.addEventListener('keydown', onKeyDown, false);
