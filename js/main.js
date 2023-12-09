@@ -1,6 +1,10 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
+const raycaster = new THREE.Raycaster();
+const mouse = new THREE.Vector2();
+
+
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera( 60, window.innerWidth / window.innerHeight, 0.1, 1000 );
 camera.position.set(0, 5, 10);
@@ -110,9 +114,33 @@ function createPainting(imageURL, width, height, position) {
     return painting;
 }
 
-// Front wall
+// Paintings
+
+let paintings = [];
+
 const painting1 = createPainting("https://ipfs.mona.gallery/ipfs/bafybeiflkfw54cj3ckt7esvg7qpxnolhlclcahnpmixnkwgkklzctfotrq", 10, 5, new THREE.Vector3(-10, 5, -19.95));
+painting1.userData = {
+    type: 'space',
+    description: 'Brought to you by TAYLOR.WTF and WTFINDUSTRIES',
+    creator: '0x550e970e31a45b06df01a00b1c89a478d4d5e00a',
+    url: 'https://monaverse.com/spaces/jpeg.land-v.069'
+}
+painting1.castShadow = true;
+painting1.receiveShadow = true;
+paintings.push(painting1);
+
 const painting2 = createPainting("https://ipfs.mona.gallery/ipfs/bafybeictvdimmdyvguna75rn2rxp4lgu423pzznqx4nxgndw6pdb4c3va4", 10, 5, new THREE.Vector3(10, 5, -19.95));
+painting2.userData = {
+    type: 'space',
+    description: 'Brought to you by TAYLOR.WTF and WTFINDUSTRIES',
+    creator: '0x550e970e31a45b06df01a00b1c89a478d4d5e00a',
+    url: 'https://monaverse.com/spaces/jpeg.land-v.069'
+}
+painting2.castShadow = true;
+painting2.receiveShadow = true;
+paintings.push(painting2);
+
+
 scene.add(painting1, painting2);
 
 // Left wall
@@ -129,6 +157,35 @@ const painting6 = createPainting("https://ipfs.mona.gallery/ipfs/bafybeiaehgywxn
 painting6.rotation.y = Math.PI/2;
 // scene.add(painting5, painting6);
 
+
+// Handle mouse events
+
+function clickHandling(renderer, camera, paintings) {
+    renderer.domElement.addEventListener(
+        'click',
+        (event) => {
+            mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+            mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+            onClick(camera, paintings);
+        },
+        false
+    );
+}
+
+function onClick(camera, paintings) {
+    raycaster.setFromCamera(mouse, camera);
+    const intersects = raycaster.intersectObjects(paintings);
+    console.log(intersects)
+    // const painting = intersects.object
+    console.log(intersects);
+    if (intersects.length > 0) {
+        const painting = intersects[0].object
+        console.log(painting);
+        console.log('Clicked Painting: ', painting.userData.type)
+    }
+}
+
+clickHandling(renderer, camera, paintings);
 
 
 // Controls
