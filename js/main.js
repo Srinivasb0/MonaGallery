@@ -1,5 +1,8 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+const raycaster = new THREE.Raycaster();
+const mouse = new THREE.Vector2();
+
 
 
 const monaSpaces = {
@@ -507,9 +510,6 @@ const monaSpaces = {
   ]
 }
 
-const raycaster = new THREE.Raycaster();
-const mouse = new THREE.Vector2();
-
 
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera( 60, window.innerWidth / window.innerHeight, 0.1, 1000 );
@@ -710,7 +710,7 @@ painting6.receiveShadow = true;
 paintings.push(painting1, painting2, painting3, painting4, painting5, painting6);
 scene.add(painting1, painting2, painting3, painting4, painting5, painting6);
 
-// Handle mouse events
+// Handle mouse click events
 
 function clickHandling(renderer, camera, paintings) {
     renderer.domElement.addEventListener(
@@ -737,6 +737,31 @@ function onClick(camera, paintings) {
 }
 
 clickHandling(renderer, camera, paintings);
+
+// Handle mouse hoover events
+function hooverHandling(renderer, camera, paintings) {
+    renderer.domElement.addEventListener(
+        'mousemove',
+        (event) => {
+            mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+            mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+            onHoover(camera, paintings);
+        },
+        false
+    );
+}
+
+function onHoover(camera, paintings) {
+    raycaster.setFromCamera(mouse, camera);
+    const intersects = raycaster.intersectObjects(paintings);
+    console.log(intersects);
+    if (intersects.length > 0) {
+        const painting = intersects[0].object
+        return painting.userData;
+    }
+}
+
+hooverHandling(renderer, camera, paintings);
 
 
 // Controls
