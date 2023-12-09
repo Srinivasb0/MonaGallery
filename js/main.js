@@ -513,7 +513,7 @@ const monaSpaces = {
 
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera( 60, window.innerWidth / window.innerHeight, 0.1, 1000 );
-camera.position.set(0, 5, 10);
+camera.position.set(0, 5, 20);
 
 
 const renderer = new THREE.WebGLRenderer();
@@ -681,8 +681,8 @@ painting4.receiveShadow = true;
 
 
 // Right wall
-const painting5 = createPainting(monaSpaces['data'][4]['image'], 10, 5, new THREE.Vector3(15, 5, -15));
-painting5.rotation.z = Math.PI;
+const painting5 = createPainting(monaSpaces['data'][4]['image'], 10, 5, new THREE.Vector3(19.5, 5, 10));
+painting5.rotation.y = Math.PI/2;
 painting5.userData = {
     id: monaSpaces['data'][4]['id'],
     type: monaSpaces['data'][4]['type'],
@@ -694,7 +694,7 @@ painting5.userData = {
 painting5.castShadow = true;
 painting5.receiveShadow = true;
 
-const painting6 = createPainting(monaSpaces['data'][5]['image'], 10, 5, new THREE.Vector3(19, 5, -5));
+const painting6 = createPainting(monaSpaces['data'][5]['image'], 10, 5, new THREE.Vector3(19.5, 5, 5));
 painting6.rotation.y = Math.PI/2;
 painting6.userData = {
     id: monaSpaces['data'][5]['id'],
@@ -762,6 +762,7 @@ function onHoover(camera, paintings) {
 }
 
 hooverHandling(renderer, camera, paintings);
+
 
 
 // Controls
