@@ -513,17 +513,15 @@ const monaSpaces = {
 
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera( 60, window.innerWidth / window.innerHeight, 0.1, 1000 );
-camera.position.set(0, 5, 20);
+camera.position.set(0, 5, 15);
+
+const ambient = new THREE.AmbientLight( 0x444444 );
 
 
 const renderer = new THREE.WebGLRenderer();
 renderer.setSize( window.innerWidth, window.innerHeight );
 document.body.appendChild( renderer.domElement );
 
-const geometry = new THREE.BoxGeometry( 1, 1, 1 );
-const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
-const cube = new THREE.Mesh( geometry, material );
-scene.add( cube );
 
 // create the floor plane
 // Load the textures
@@ -558,7 +556,7 @@ roughTexture.wrapS = roughTexture.wrapT = THREE.RepeatWrapping;
 // Front wall
 const frontWall = new THREE.Mesh(
     new THREE.BoxGeometry(80, 20, 0.001),
-    new THREE.MeshBasicMaterial({map:roughTexture, color : 0xadadae, side: THREE.DoubleSide})
+    new THREE.MeshBasicMaterial({map:roughTexture, color : 0x702963, side: THREE.DoubleSide})
 );
 frontWall.position.z = -20;
 
@@ -577,7 +575,7 @@ const rightWall = new THREE.Mesh(
     new THREE.BoxGeometry(80, 20, 0.001), 
     new THREE.MeshBasicMaterial({map:roughTexture, color : 0xadadae, side: THREE.DoubleSide})
 );
-rightWall.position.x = 20;
+rightWall.position.x = 25;
 rightWall.rotation.y = Math.PI / 2; 
 
   // Back Wall
@@ -596,7 +594,7 @@ for (let i = 0; i < wallGroup.children.length; i++) {
 }
 
 // Ceiling
-// const normalTexture = new THREE.TextureLoader().load("../img/grid-ceiling.jpeg")
+// const normalTexture = new THREE.TextureLoader().load("../img/ceiling.jpeg")
 // normalTexture.wrapS = normalTexture.wrapT = THREE.RepeatWrapping;
 
 const ceilingGeometry = new THREE.PlaneGeometry(50, 50);
@@ -681,7 +679,7 @@ painting4.receiveShadow = true;
 
 
 // Right wall
-const painting5 = createPainting(monaSpaces['data'][4]['image'], 10, 5, new THREE.Vector3(19.5, 5, 10));
+const painting5 = createPainting(monaSpaces['data'][4]['image'], 10, 5, new THREE.Vector3(25, 5, 10));
 painting5.rotation.y = Math.PI/2;
 painting5.userData = {
     id: monaSpaces['data'][4]['id'],
@@ -732,7 +730,12 @@ function onClick(camera, paintings) {
         const painting = intersects[0].object
         console.log(painting);
         console.log('Clicked Painting: ', painting.userData.type);
-        window.open(painting.userData.url, '_blank');
+        // window.open(painting.userData.url, '_blank');
+        document.getElementById("type").innerHTML = painting.userData.type;
+        document.getElementById("title").innerHTML = painting.userData.title;
+        document.getElementById("artist").innerHTML = painting.userData.artist;
+        document.getElementById("creator").innerHTML = painting.userData.creator;
+        document.getElementById("url").innerHTML = painting.userData.url;
     }
 }
 
@@ -757,11 +760,13 @@ function onHoover(camera, paintings) {
     console.log(intersects);
     if (intersects.length > 0) {
         const painting = intersects[0].object
-        return painting.userData;
+        document.getElementById("type").innerHTML = painting.userData.type;
+        document.getElementById("type").innerHTML = painting.userData.artist;
+        document.getElementById("type").innerHTML = painting.userData.creator;
     }
 }
 
-hooverHandling(renderer, camera, paintings);
+// hooverHandling(renderer, camera, paintings);
 
 
 
@@ -788,10 +793,6 @@ function onKeyDown(event){
 
 function animate() {
 	requestAnimationFrame( animate );
-
-	cube.rotation.x += 0.01;
-	cube.rotation.y += 0.01;
-
 	renderer.render( scene, camera );
 }
 animate();
