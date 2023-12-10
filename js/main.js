@@ -736,10 +736,11 @@ function onClick(camera, paintings) {
         document.getElementById("artist").innerHTML = painting.userData.artist;
         document.getElementById("creator").innerHTML = painting.userData.creator;
         document.getElementById("url").innerHTML = painting.userData.url;
+
     }
 }
-
 clickHandling(renderer, camera, paintings);
+
 
 // Handle mouse hoover events
 function hooverHandling(renderer, camera, paintings) {
