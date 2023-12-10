@@ -3,28 +3,33 @@
 	<head>
 		<meta charset="utf-8">
 		<title>My first three.js app</title>
-		<!-- <link rel="stylesheet" href="./css/style.css"> -->
+		<link rel="stylesheet" href="./css/style.css">
 	</head>
 	<body>
         <div class="background_menu">
             <div id="menu">
                 <div id="img_container">
-                    <img src="img/starrynight.jpeg" alt="starry night">
+                    <img src="img/music-bcg.jpeg" alt="starry night">
                 </div>
+
                 <div id="content">
-                    <h1>Art Gallery</h1>
+                    <h1>Welcome to the Mona spaces</h1>
                     <div>
-                        <p>This is an interactive 3D gallery</p>
-                        <p>Made with love and Three js</p>
+                        <p>This is an interactive 3D gallery dedicated for Mona Music spaces</p>
                     </div>
-                    <div id="play_button">
+                    <div id="play_button" onClick="javascript:clickinner(this)">
                         <p>Enter the Gallery</p>
+                        <script>
+                            function clickinner(target) { // Target refers to the clicked element
+                                location.href='anim.html';
+                            };
+                            </script>
                     </div>
                 </div>
             </div>
         </div>
         
 		<script src="./js/three.js"></script>
-        <script type="module" src="./js/main.js"></script>
+        <!-- <script type="module" src="./js/main.js"></script> -->
 	</body>
 </html>

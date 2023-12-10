@@ -4,10 +4,24 @@
 		<meta charset="utf-8">
 		<title>My first three.js app</title>
 		<style>
-			body { margin: 0; }
-		</style>
+			</style>
+		<script type="module" src="./js/main.js"></script>
+		<script type="module" src="./js/gift.js"></script>
 	</head>
 	<body>
-		<script type="module" src="./js/main.js"></script>
+		<form>
+			<p id="type"></p>
+			<p id="title"></p>
+			<p id="artist"></p>
+			<p id="creator"></p>
+			<p id="url"></p>
+			<p>Vote for the artist</p>
+			<input type="radio" name="vote" value="foo" />
+			<p>Comment your thoughts</p>
+			<input type="text" id="comment" name="Enter comment">
+			<p>Enter amount to Gift</p>
+			<input type="number" id="add-value" name="Gift tip in crypto">
+			<button type="button">Submit!</button>
+		</form>
 	</body>
 </html>
